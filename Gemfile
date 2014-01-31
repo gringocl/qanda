@@ -12,6 +12,7 @@ gem 'devise'
 gem 'minitest'
 gem 'minitest-rails'
 gem 'foundation-rails'
+gem 'ffaker'
 
 group :test do
   gem "minitest-rails-capybara"

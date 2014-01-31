@@ -1,25 +1,36 @@
-<h1>Listing questions</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+       <!-- Main Feed -->
+    <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
+    <div class="large-6 columns">
+
+     <% @questions.last(3).each do |question| %>     <!-- Feed Entry -->
+      <div class="row">
+        <div class="large-2 columns small-3"><img src="http://placesheen.com/150/150" /></div>
+
+        <div class="large-10 columns text-justify">
+          <p><strong>Some Person asked:</strong> <%= truncate( strip_tags(question.body), length: 150) %>? </p>
+
+
+          <div class="row">
+            <div class="large-11 columns text-justify">
+            <p><strong>Some Person answered:</strong><%= truncate(strip_tags(question.answer), length: 350) %></p></div>
+          <ul class="inline-list">
+            <li><%= link_to 'Show', question %></li>
+            <li><%= link_to 'Edit', edit_question_path(question) %></li>
+            <li><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Feed Entry -->
+
+      <hr />
+
     <% end %>
-  </tbody>
-</table>
 
-<br>
+      <!-- Feed Entry -->
 
-<%= link_to 'New Question', new_question_path %>
+
+          </div>
