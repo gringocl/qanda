@@ -1,4 +1,16 @@
 <p id="notice"><%= notice %></p>
-
+<ul>
+  <h4>
+    <%= @question.title  %>
+  </h4>
+  <p>
+  <%= @question.body  %>
+  </p>
+  <hr><p><%= @question.answer  %> </p>
+<% @question.users.each do |user|   %>
+  <li>
+    <%= user.name  %>
+  </li>
+<% end %>
 <%= link_to 'Edit', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>
