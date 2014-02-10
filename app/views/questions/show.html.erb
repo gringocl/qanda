@@ -10,6 +10,7 @@
 <% @question.users.each do |user|   %>
   <li>
     <%= user.name  %>
+    <%= user.email %>
   </li>
 <% end %>
 <%= link_to 'Edit', edit_question_path(@question) %> |

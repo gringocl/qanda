@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   # GET /questions
@@ -25,11 +26,11 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-    @question.users << current_user
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
+        @question.users << current_user
       else
         format.html { render action: 'new' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -40,11 +41,11 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    @question.users << current_user
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { head :no_content }
+        @question.users << current_user
       else
         format.html { render action: 'edit' }
         format.json { render json: @question.errors, status: :unprocessable_entity }
@@ -70,6 +71,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params[:question]
+      params.require(:question).permit(:title, :body, :answer)
     end
 end
